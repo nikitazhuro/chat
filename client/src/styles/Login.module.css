@@ -1,0 +1,14 @@
+.Login{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.reg_form{
+    display: grid;
+    width: 200px;
+}
+.reg_form input{
+    margin-bottom: 20px;
+}
