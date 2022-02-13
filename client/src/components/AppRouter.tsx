@@ -4,7 +4,7 @@ import { privateRouter, publicRouter } from "../router";
 
 
 const AppRouter = () => {
-    const isLogin =false
+    const isLogin = true
     return(
         isLogin 
             ? <Routes>

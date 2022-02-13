@@ -1,0 +1,18 @@
+.MyModal{
+    position: fixed;
+    height: 100%;
+    display: flex;
+    width: 320px;
+    transform: translateX(-350px) ;
+    transition: transform 0.6s ease; 
+}
+.MyModal.Active {
+    transform: translateX(0%);
+    width: 100%;
+}
+.MyModal_Content {
+    background-color: #b6c8c9;
+    width: 320px;
+    height: 100%;
+    position: absolute;
+}

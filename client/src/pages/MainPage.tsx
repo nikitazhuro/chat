@@ -1,6 +1,7 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import ChatWindow from "../components/ChatWindow";
 import LeftMenu from "../components/LeftMenu";
+import MyModal from "../components/UI/modal/MyModal";
 import сlasses from '../styles/mainPage.module.css' 
 
 const Chat:FC = () => {
@@ -10,6 +11,7 @@ const Chat:FC = () => {
                 <LeftMenu/>
             </div>
             <div className={сlasses.ChatWindow_Block}>
+                <MyModal/>
                 <ChatWindow/>
             </div>
         </div>

@@ -1,5 +1,105 @@
 .ChatWindow{
     height: 100%;
     width: 100%;
-    background-color: rgb(225, 255, 255);
+    background: radial-gradient(70% 60%, #FAECD5, #CAE4D8);
+}
+.ChatWindow_ContentBlock{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.ChatWindow_Nav{
+    width: 100%;
+    height: 50px;
+}
+.ChatWindow_ChatBlock{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+.ChatWindow_Messages{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+}
+.ChatWindow_textareaBlock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+.ChatWindow_textareaWrapper{
+    margin: 20px 0;
+    display: flex;
+    width: 50%;
+    align-items: center;
+}
+.ChatWindow_textarea_input{
+    width: 100%;
+}
+.ChatWindow_textarea_input input{
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: white;
+    padding: 15px;
+}
+.ChatWindow_textarea_button button{
+    color: white;
+    font-size: 16px;
+    text-transform: uppercase;
+    background: #22252e;
+    margin-left: 20px;
+    padding: 12.2px 13px;
+    border-radius: 50%;
+    border: none;
+    transition: all 0.4 ease;
+}
+.ChatWindow_textarea_button button:hover{
+    color: #22252e;
+    background-color: #b6c8c9;
+    cursor: pointer;
+}
+.ChatWindow_MessagesWrapper{
+    display: flex;
+    height: 100%;
+    width: 50%;
+}
+.ChatWindow_MessageList{
+    width: 100%;
+    height: 100%;
+}
+.ChatWindow_MessageList_Content{
+    margin-bottom: 10px;
+    display: flex;
+}
+.avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+.ChatWindow_MessageBlock{
+    margin-left: 10px;
+    border-radius: 15px;
+    padding: 5px 10px;
+    background-color: white;
+}
+.ChatWindow_MessageBlock_title h2{
+    font-size: 16px;
+}
+.ChatWindow_MessageBlock_text p{
+    margin-top: 5px;
+}
+.ChatWindow_MessageList_avatarBlock{
+    display: flex;
+    align-items: flex-end;
 }
