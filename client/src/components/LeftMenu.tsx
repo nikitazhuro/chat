@@ -3,7 +3,7 @@ import classes from '../styles/LeftMenu.module.css'
 import friends_svg from '../img/friends.svg'
 import chats_svg from '../img/chats.svg'
 import settings_svg from '../img/settings.svg'
-import logo from '../img/logo.png'
+import logo from '../img/4.png'
 import avatar from '../img/avatar.jpg'
 import { useDispatch } from "react-redux";
 import { ActiveModalEnum } from "../store/reducers/activeMenu/types";

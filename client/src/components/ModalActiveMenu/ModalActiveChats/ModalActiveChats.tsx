@@ -14,7 +14,7 @@ const ModalActiveChats = () => {
         <div className={classes.Chats}>
             <div className={classes.Chats_SearchBlock}>
                 <div className={classes.Chats_Search}>
-                    <MyInput 
+                    <MyInput
                     value={chatSearch}
                     placeholder='Search...'
                     onChange={(e) => setChatSearch(e.target.value)}

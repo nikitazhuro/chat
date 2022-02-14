@@ -1,7 +1,7 @@
 .ChatWindow{
     height: 100%;
     width: 100%;
-    background: radial-gradient(70% 60%, #FAECD5, #CAE4D8);
+    background: radial-gradient(farthest-side ellipse at top left, white, #aaaaaa);
 }
 .ChatWindow_ContentBlock{
     height: 100%;

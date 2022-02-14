@@ -1,0 +1,18 @@
+.MyButton{
+    width: 100%;
+    font-size: 18px;
+    border: none;
+    padding: 10px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all ease 0.4s;
+    font-size: 14px
+
+}
+.MyButton:hover{
+    background-color: white;
+    color: black;
+}
