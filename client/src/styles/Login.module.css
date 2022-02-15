@@ -82,7 +82,7 @@ span{
     position: relative;
 }
 .reg_form input{
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     background: rgba(255, 255, 255, 0.062);
     border: 1px white solid;
     color: white;
@@ -108,6 +108,7 @@ span{
     background-color: #22252e;
 }
 .elemBtn {
+    margin-top: 10px;
     width: 100%;
     font-size: 14px;
     padding: 10px;

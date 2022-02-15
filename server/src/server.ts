@@ -50,7 +50,7 @@ const broadcastMessage = (message: any) => {
 const startServer = async () => {
     try {
         await mongoose.connect(`${process.env.DB_URL}`);
-        app.listen(process.env.PORT || 6000, () => {
+        app.listen(`${process.env.SERVER_PORT}` || 4000, () => {
             console.log(`Server started on port ${process.env.SERVER_PORT}`);
         });
     } catch (error) {

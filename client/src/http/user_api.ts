@@ -1,17 +1,6 @@
 import { $authHost, $host } from ".";
 
-
-interface IData {
-    login: string,
-    password: string
-}
-
-interface IRegistration {
-    url: URL,
-    data: IData
-}
-
-export const registration  = async ({login, password}: IData)  => {
-    const {data} = await $host.post<IRegistration> ('', {login, password})
+export const registration = async (phoneNumber: string, password: string)  => {
+    const {data} = await $host.post('api/user/registration', {phoneNumber, password})
     return data
 }

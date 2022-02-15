@@ -6,22 +6,19 @@ import logo from '../img/4.png'
 import MyButton from "../components/UI/button/MyButton";
 
 interface IState {
-    login: string,
+    phoneNumber: string,
     password: string
 }
-interface IActivateButon {
-    login?: string,
-    registration?: string
-}
-
 const Login:FC = () => {
     const [state, setState] = useState<IState>({
-        login: '',
+        phoneNumber: '',
         password: ''
     })
     const [activeButton, setActiveButton] = useState('')
     const reg = async () => {
-        await registration(state)
+        await registration(state.phoneNumber, state.password).then((data) => {
+            alert(data)
+        })
     }
     return (
         <div className={classes.Login}>
@@ -47,8 +44,13 @@ const Login:FC = () => {
                     {activeButton == 'login' && <div className={classes.reg_form_elems}>
                         <MyInput
                         placeholder="Введите номер телефона"
-                        value={state.login}
-                        onChange={(e) => setState({...state, login: e.target.value})} 
+                        value={state.phoneNumber}
+                        onChange={(e) => setState({...state, phoneNumber: e.target.value})} 
+                        type="text" />
+                        <MyInput
+                        placeholder="Введите номер телефона"
+                        value={state.phoneNumber}
+                        onChange={(e) => setState({...state, phoneNumber: e.target.value})} 
                         type="text" />
                         <MyButton className={classes.elemBtn} onClick={reg}>Войти</MyButton>
                         <div className={classes.reg_form_elemSpan}>
@@ -58,9 +60,14 @@ const Login:FC = () => {
                     {activeButton == 'registration' && <div className={classes.reg_form_elems}>
                         <MyInput
                         placeholder="Введите номер телефона"
-                        value={state.login}
-                        onChange={(e) => setState({...state, login: e.target.value})} 
+                        value={state.phoneNumber}
+                        onChange={(e) => setState({...state, phoneNumber: e.target.value})} 
                         type="text" />
+                        <MyInput
+                        placeholder="Введите пароль"
+                        value={state.password}
+                        onChange={(e) => setState({...state, password: e.target.value})} 
+                        type="password" />
                         <MyButton className={classes.elemBtn} onClick={reg}>Зарегистрироваться</MyButton>
                         <div className={classes.reg_form_elemSpan}>
                             <span onClick={() => setActiveButton('login')}>Есть аккаунт? Войдите</span>    

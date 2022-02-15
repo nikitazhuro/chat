@@ -5,11 +5,11 @@ type IConfig = AxiosRequestConfig & {
 }
 
 const $host = axios.create({
-    baseURL: ''
+    baseURL: "http://localhost:4000/"
 })
 
 const $authHost = axios.create({
-    baseURL: ''
+    baseURL: 'http://localhost:6000/'
 })
 
 $authHost.interceptors.request.use((config: IConfig) => {
