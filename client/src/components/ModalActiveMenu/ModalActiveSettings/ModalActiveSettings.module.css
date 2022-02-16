@@ -6,14 +6,19 @@
 .ModalSettings_Content{
     height: 100%;
     width: 100%;
-    margin-top: 30px;
     display: flex;
     flex-direction: column;
 
 }
 .AvatarSettings{
+    height: 25%;
+    flex-direction: column;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+}
+.AvatarSettings h1{
+    font-size: 20px;
 }
 .AvatarSettings img{
     cursor: pointer;
@@ -24,4 +29,38 @@
 }
 .AvatarSettings input{
     display: none;
+}
+
+.InputsSettings{
+    height: 65%;
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+}
+.Inputs{
+    width: 250px;
+}
+
+.Inputs input {
+    cursor: pointer;
+    border: 1px black solid;
+    margin-top: 15px;
+    padding: 15px 10px;
+}
+.ButtonsSettings{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.Buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+}
+
+.Buttons button {
+    color: black;
+    border: 1px solid black;
+    width: 90px;
+    padding: 10px;
 }
