@@ -1,0 +1,27 @@
+.ModalSettings{
+    height: 100%;
+    width: 100%;
+}
+
+.ModalSettings_Content{
+    height: 100%;
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+
+}
+.AvatarSettings{
+    display: flex;
+    justify-content: center;
+}
+.AvatarSettings img{
+    cursor: pointer;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: black 1px solid;
+}
+.AvatarSettings input{
+    display: none;
+}

@@ -9,7 +9,7 @@ const $host = axios.create({
 })
 
 const $authHost = axios.create({
-    baseURL: 'http://localhost:6000/'
+    baseURL: 'http://localhost:4000/'
 })
 
 $authHost.interceptors.request.use((config: IConfig) => {

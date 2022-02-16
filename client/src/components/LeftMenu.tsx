@@ -12,7 +12,6 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 
 const LeftMenu:FC = () => {
     const {chats, settings, friends} = useTypedSelector(state => state.activeMenuReducer)
-    const svg_classes = [classes.svg_icon]
     const dispatch = useDispatch()
     return (
         <div className={classes.LeftMenu}>

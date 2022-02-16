@@ -1,9 +1,10 @@
 import React, { FC, useState } from "react";
 import MyInput from "../components/UI/input/MyInput";
-import { registration } from "../http/user_api";
+import { login, registration } from "../http/user_api";
 import classes from '../styles/Login.module.css'
 import logo from '../img/4.png'
 import MyButton from "../components/UI/button/MyButton";
+import { useNavigate } from "react-router-dom";
 
 interface IState {
     phoneNumber: string,
@@ -14,10 +15,16 @@ const Login:FC = () => {
         phoneNumber: '',
         password: ''
     })
+    const router = useNavigate()
     const [activeButton, setActiveButton] = useState('')
     const reg = async () => {
-        await registration(state.phoneNumber, state.password).then((data) => {
-            alert(data)
+        await registration(state.phoneNumber, state.password).then(() => {
+            setActiveButton('login')
+        })
+    }
+    const log = async () => {
+        await login(state.phoneNumber, state.password).then((data) => {
+            router('/login')
         })
     }
     return (
@@ -48,11 +55,11 @@ const Login:FC = () => {
                         onChange={(e) => setState({...state, phoneNumber: e.target.value})} 
                         type="text" />
                         <MyInput
-                        placeholder="Введите номер телефона"
-                        value={state.phoneNumber}
-                        onChange={(e) => setState({...state, phoneNumber: e.target.value})} 
-                        type="text" />
-                        <MyButton className={classes.elemBtn} onClick={reg}>Войти</MyButton>
+                        placeholder="Введите пароль"
+                        value={state.password}
+                        onChange={(e) => setState({...state, password: e.target.value})} 
+                        type="password" />
+                        <MyButton className={classes.elemBtn} onClick={log}>Войти</MyButton>
                         <div className={classes.reg_form_elemSpan}>
                             <span onClick={() => setActiveButton('registration')}>Нет аккаунтa? Зарегистрируйтесь</span>
                         </div>   
