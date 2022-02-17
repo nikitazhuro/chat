@@ -1,8 +1,10 @@
 export interface IUserData {
-    id?: string,
     userName?: string,
     avatar?: string,
-    phoneNumber?: string
+    phoneNumber?: string,
+    firstName?: string,
+    secondName?: string,
+    personalInfo?: string
 }
 
 export enum UserDataActionsEnum {
@@ -15,7 +17,10 @@ interface IPayload {
     id: string,
     userName: string,
     avatar: string,
-    phoneNumber: string
+    phoneNumber: string,
+    firstName: string,
+    secondName: string,
+    personalInfo: string
 }
 
 interface GetUserDataAction {

@@ -7,13 +7,10 @@ import * as fileUpload from 'express-fileupload';
 import * as cors from 'cors';
 import * as mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
+import User from './models/userModel';
 dotenv.config();
 
 const app = express();
-function loggerMiddleware(request: express.Request, response: express.Response, next: any) {
-    console.log(`${request.method} ${request.path}`);
-    next();
-  }
 
 
 app.use(express.json());
@@ -21,29 +18,30 @@ app.use(express.static(path.resolve(__dirname, 'static')));
 app.use(cookieParser());
 app.use(fileUpload({}));
 app.use(cors());
-app.use(loggerMiddleware)
 app.use('/api', router);
 
 const ws = new WebSocket.Server({ 
     port: 5000,
 }, () => console.log(`WS server started on port ${process.env.WS_PORT}`));
-
-ws.on('connection', (ws) => {
+ws.on('connection', (ws: any) => {
     ws.on('message', (message: any) => {
-        message = JSON.parse(message)
+        message = JSON.parse(message);
         switch (message.event) {
             case 'message':
                 broadcastMessage(message)
                 break;
             case 'connection':
-                broadcastMessage(message)
                 break;
         }
     })
 })
-const broadcastMessage = (message: any) => {
-    ws.clients.forEach((client) => {
-        client.send(JSON.stringify(message))
+const broadcastMessage = async (message: any) => {
+    const user = await User.findOne({phoneNumber :message.from})
+    ws.clients.forEach((client: any) => {
+        if(user.rooms.includes(message.messageId)){
+            client.send(JSON.stringify(message))
+        }
+            
     })
 }
 

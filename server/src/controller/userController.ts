@@ -25,7 +25,9 @@ class UserController {
     }
     async authCheck (req:any, res: any) {
         try {
-            return res.json('Success')
+            const accessToken = req.headers.autorization.split(' ')[1];
+            const user = await userService.authCheck(accessToken)
+            return res.json(user)
         } catch (error) {
             return res.status(400).json('Ошибка доступа')
         }
@@ -42,15 +44,22 @@ class UserController {
     }
     async updateUser(req:any, res: any) {
         try {
-            const {phoneNumber} = req.body;
-            console.log(phoneNumber)
-            const {img} = req.files;
-            let fileName = uuid.v4() + '.jpg';
-            img.mv(path.resolve(__dirname, '..', 'static', fileName));
-            await userService.updateUser(phoneNumber, fileName)
+            const {phoneNumber, firstName, secondName, personalInfo} = req.body;
+            let image : any;
+            if(req.files){
+                const {img} = req.files;
+                image = img
+            }
+            let fileName: any;
+            if(image) {
+                fileName = uuid.v4() + '.jpg';
+                image.mv(path.resolve(__dirname, '..', 'static', fileName));
+            }
+            
+            await userService.updateUser(phoneNumber, fileName, firstName, secondName, personalInfo)
             return res.json('complete')
-        } catch (e) {
-            return res.status(400).json(e)
+        } catch (e: any) {
+            return res.status(400).json(e.message)
         }
     }
 }

@@ -12,6 +12,7 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 
 const LeftMenu:FC = () => {
     const {chats, settings, friends} = useTypedSelector(state => state.activeMenuReducer)
+    const {avatar} = useTypedSelector(state => state.userReducer)
     const dispatch = useDispatch()
     return (
         <div className={classes.LeftMenu}>
@@ -35,7 +36,7 @@ const LeftMenu:FC = () => {
             </div>
             <div className={classes.profile_block}>
                 <div>
-                    <img className={classes.avatar} src={avatar} />
+                    <img className={classes.avatar} src={`http://localhost:4000/` + avatar} />
                 </div>
                 <div className={classes.profile_block_svg}>
                     <img 

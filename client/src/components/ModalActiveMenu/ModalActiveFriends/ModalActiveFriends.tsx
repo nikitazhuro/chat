@@ -27,7 +27,7 @@ const ModalActiveFriends = () => {
             </div>
             <div className={classes.Chats_ChatsBlock}>
                 {chats.map(chat => 
-                <div className={classes.Chats_ChatBlock}>
+                <div key={chat.userNumber} className={classes.Chats_ChatBlock}>
                     <div className={classes.Chats_ChatImg}>
                         <img className={classes.avatar} src={avatar}/>
                     </div>

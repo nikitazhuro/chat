@@ -22,8 +22,8 @@ const ModalActiveChats = () => {
                 </div>
             </div>
             <div className={classes.Chats_ChatsBlock}>
-                {chats.map(chat => 
-                <div className={classes.Chats_ChatBlock}>
+                {chats.map((chat, index) => 
+                <div key={index} className={classes.Chats_ChatBlock}>
                     <div className={classes.Chats_ChatImg}>
                         <img className={classes.avatar} src={avatar}/>
                     </div>

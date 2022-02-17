@@ -6,7 +6,6 @@ import Token from '../models/tokenModel';
 import * as fs from 'fs'
 import * as path from 'path'
 
-
 class UserService {
     async registration (phoneNumber:string, password: string) {
         try {
@@ -40,19 +39,42 @@ class UserService {
             throw new Error(`Ошибка регистрации: ${error.message}`)
         }
     }
+    async authCheck (accessToken: string) {
+        try {
+            const tokenData:any = tokenService.validAccessToken(accessToken)
+            const user = await User.findOne({phoneNumber: tokenData.userDto.phoneNumber})
+            return user
+        } catch (error: any) {
+            throw new Error(`Ошибка получения данных: ${error.message}`)
+        }
+    }
     async logout (refreshToken: any) {
-        const token = await Token.deleteOne({refreshToken});
-        return token
+        try {
+            await Token.deleteOne({refreshToken});
+        } catch (error: any) {
+            throw new Error(`Ошибка: ${error.message}`)
+        }
     }
 
-    async updateUser(phoneNumber: string, fileName: string){
+    async updateUser (phoneNumber: string, fileName: string, firstName: string, secondName: string, personalInfo: string){
         try {
             const user = await User.findOne({phoneNumber});
-            if(user.avatar[0]){
+            if(user.avatar.length !== 0 && fileName) {
                 fs.rmSync(path.resolve(__dirname, '..', 'static', `${user.avatar[0]}`))
             }
-            user.avatar[0] = fileName;
-            return (user.save())
+            if(firstName){
+                user.firstName = firstName;
+            }
+            if(fileName){
+              user.avatar[0] = fileName;  
+            }
+            if(secondName){
+                user.secondName = secondName;
+            }
+            if(personalInfo){
+                user.personalInfo = personalInfo;
+            }
+            return user.save()
         } catch (e: any) {
             throw new Error(e.message)
         } 

@@ -5,6 +5,8 @@ import classes from '../styles/Login.module.css'
 import logo from '../img/4.png'
 import MyButton from "../components/UI/button/MyButton";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { IsAuthEnum } from "../store/reducers/auth/types";
 
 interface IState {
     phoneNumber: string,
@@ -15,7 +17,8 @@ const Login:FC = () => {
         phoneNumber: '',
         password: ''
     })
-    const router = useNavigate()
+    const router = useNavigate();
+    const dispatch = useDispatch()
     const [activeButton, setActiveButton] = useState('')
     const reg = async () => {
         await registration(state.phoneNumber, state.password).then(() => {
@@ -24,7 +27,8 @@ const Login:FC = () => {
     }
     const log = async () => {
         await login(state.phoneNumber, state.password).then((data) => {
-            router('/login')
+            dispatch({type: IsAuthEnum.SET_ISAUTH, payload: true})
+            router('/chat')
         })
     }
     return (

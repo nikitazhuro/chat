@@ -42,7 +42,6 @@
 }
 
 .Inputs input {
-    cursor: pointer;
     border: 1px black solid;
     margin-top: 15px;
     padding: 15px 10px;

@@ -11,13 +11,9 @@ import { IsAuthEnum } from './store/reducers/auth/types';
 const  App = () => {
   const dispatch = useDispatch()
   useEffect(() => {
-    authCheck().then(() => {
-
-      const token: any = localStorage.getItem('accessToken');
-      const data: any = jwtDecode(token);
+    authCheck().then((data) => {
       dispatch({type: IsAuthEnum.SET_ISAUTH, payload: true})
-      dispatch({type: UserDataActionsEnum.SET_USERDATA, payload: data.userDto})
-      console.log(data.userDto)
+      dispatch({type: UserDataActionsEnum.SET_USERDATA, payload: data})
     })
   }, [])
   return (

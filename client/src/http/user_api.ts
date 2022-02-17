@@ -12,7 +12,8 @@ export const login = async (phoneNumber: string, password: string)  => {
 }
 
 export const authCheck = async () => {
-    await $authHost.get('api/user/authCheck')
+    const {data} = await $authHost.get('api/user/authCheck')
+    return data
 }
 
 export const logout = async () => {

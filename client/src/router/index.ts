@@ -8,7 +8,8 @@ export interface IRouter {
 }
 export enum RouterList {
     LOGIN = '/login',
-    CHAT = '/'
+    CHAT = '/chat',
+    CHAT_ID = '/chat/:roomId'
 }
 
 export const publicRouter: IRouter[] = [
@@ -18,5 +19,6 @@ export const publicRouter: IRouter[] = [
 
 export const privateRouter: IRouter[] = [
     {path: RouterList.CHAT, element: Chat},
+    {path: RouterList.CHAT_ID, element: Chat},
     {path: '*', element: Chat}
 ]

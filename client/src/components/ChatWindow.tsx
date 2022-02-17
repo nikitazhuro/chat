@@ -3,30 +3,38 @@ import classes from '../styles/ChatWindow.module.css'
 import MyButton from "./UI/button/MyButton";
 import MyInput from "./UI/input/MyInput";
 import avatar from '../img/avatar.jpg'
+import { useParams } from "react-router-dom";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 interface IMessage {
     event?: string,
+    from?: string,
     id?: number,
     value?: string,
     userName?: string,
-    date?: string
+    date?: string,
+    roomId?: string
 }
 const ChatWindow:FC = () => {
     const [text, setText] = useState('');
+    const {roomId} = useParams()
+    const {phoneNumber} = useTypedSelector(state => state.userReducer)
     const [messageList, setMessageList] = useState<any[]>([])
     const socket = useRef<WebSocket>()
     const sendAMessage = () => {
         const message = {
             userName: 'Nkita',
+            from: phoneNumber,
             id: Date.now(),
             value: text,
-            event: 'message'
+            event: 'message',
+            messageId : roomId
         }
         socket.current?.send(JSON.stringify(message))
         setText('')
     }
     useLayoutEffect(() => {
-        socket.current = new WebSocket('ws://localhost:5000');
+        socket.current = new WebSocket(`ws://localhost:5000`);
         socket.current.onopen = () => {
             console.log('Соединение установлено')
             const message: IMessage = {
@@ -34,14 +42,16 @@ const ChatWindow:FC = () => {
                 id: Date.now(),
                 value: 'К чату присоединился Nikita',
                 userName: 'Nikita',
-                date: '15.02.2022'
+                date: '15.02.2022',
+                roomId: roomId
             }
             socket.current?.send(JSON.stringify(message))
         }
         socket.current.onmessage = (event) => {
             const message = JSON.parse(event.data)
-            console.log(message)
-            setMessageList((prev: any) => [...prev, message])
+            if(roomId == message.messageId){
+               setMessageList((prev: any) => [...prev, message]) 
+            }
         }
         socket.current.onclose = () => {
             console.log('Socket закрыт')
