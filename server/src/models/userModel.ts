@@ -8,6 +8,7 @@ const User = new mongoose.Schema({
     secondName: {type: String},
     personalInfo: {type: String},
     userName: {type: String},
+    contacts: [],
     rooms: [],
     avatar: []
 })

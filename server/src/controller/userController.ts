@@ -1,4 +1,3 @@
-import cookieParser = require("cookie-parser");
 import userService from "../services/userService";
 import * as uuid from 'uuid'
 import * as path from 'path'
@@ -60,6 +59,24 @@ class UserController {
             return res.json('complete')
         } catch (e: any) {
             return res.status(400).json(e.message)
+        }
+    }
+    async findAUser (req:any, res: any) {
+        try {
+            const {phoneNumber} = req.body;
+            const user = await userService.findAUser(phoneNumber);
+            return res.json(user)
+        } catch (e) {
+            return res.status(400).json(e)
+        }
+    }
+    async addContact (req:any, res: any) {
+        try {
+            const {myPhoneNumber, contactPhoneNumber} = req.body;
+            await userService.addContact(myPhoneNumber, contactPhoneNumber);
+            return res.json('Пользователь добавлен')
+        } catch (e) {
+            return res.status(400).json(e)
         }
     }
 }

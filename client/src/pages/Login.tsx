@@ -29,6 +29,7 @@ const Login:FC = () => {
         await login(state.phoneNumber, state.password).then((data) => {
             dispatch({type: IsAuthEnum.SET_ISAUTH, payload: true})
             router('/chat')
+            window.location.reload()
         })
     }
     return (

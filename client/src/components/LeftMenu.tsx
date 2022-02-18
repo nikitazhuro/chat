@@ -8,16 +8,18 @@ import avatar from '../img/avatar.jpg'
 import { useDispatch } from "react-redux";
 import { ActiveModalEnum } from "../store/reducers/activeMenu/types";
 import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useNavigate } from "react-router-dom";
 
 
 const LeftMenu:FC = () => {
     const {chats, settings, friends} = useTypedSelector(state => state.activeMenuReducer)
     const {avatar} = useTypedSelector(state => state.userReducer)
+    const router = useNavigate()
     const dispatch = useDispatch()
     return (
         <div className={classes.LeftMenu}>
             <div className={classes.logo_block}>
-                <img className={classes.logo_img} src={logo}/>
+                <img onClick={() => router('/chat')} className={classes.logo_img} src={logo}/>
             </div>
             <div className={classes.options_block}>
                 <div className={classes.options_block_friends}>

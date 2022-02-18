@@ -60,13 +60,14 @@ class UserService {
         try {
             const user = await User.findOne({phoneNumber});
             if(user.avatar.length !== 0 && fileName) {
+                console.log('Working')
                 fs.rmSync(path.resolve(__dirname, '..', 'static', `${user.avatar[0]}`))
             }
             if(firstName){
                 user.firstName = firstName;
             }
             if(fileName){
-              user.avatar[0] = fileName;  
+              user.avatar[0] = fileName; 
             }
             if(secondName){
                 user.secondName = secondName;
@@ -78,6 +79,30 @@ class UserService {
         } catch (e: any) {
             throw new Error(e.message)
         } 
+    }
+    async findAUser (phoneNumber: string) {
+        try {
+            const user = await User.findOne({phoneNumber});
+            return user
+        } catch (e: any) {
+            throw new Error(e.message)
+        }
+    }
+    async addContact (myPhoneNumber: string, contactPhoneNumber: string) {
+        try {
+            const user = await User.findOne({phoneNumber: myPhoneNumber})
+            const contact = await User.findOne({phoneNumber: contactPhoneNumber})
+            const newContactData = {
+                phoneNumber: contact.phoneNumber,
+                avatar: contact.avatar,
+                firstName: contact.firstName,
+                secondtName: contact.secondName
+            }
+            user.contacts.push(newContactData)
+            return user.save()
+        } catch (e: any) {
+            throw new Error(e.message)
+        }
     }
 }
 

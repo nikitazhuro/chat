@@ -4,7 +4,9 @@ export interface IUserData {
     phoneNumber?: string,
     firstName?: string,
     secondName?: string,
-    personalInfo?: string
+    personalInfo?: string,
+    contacts?: any [],
+    rooms?: any []
 }
 
 export enum UserDataActionsEnum {
@@ -20,7 +22,9 @@ interface IPayload {
     phoneNumber: string,
     firstName: string,
     secondName: string,
-    personalInfo: string
+    personalInfo: string,
+    contacts: [],
+    rooms: any []
 }
 
 interface GetUserDataAction {

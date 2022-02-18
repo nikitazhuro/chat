@@ -7,6 +7,7 @@ import сlasses from '../styles/mainPage.module.css'
 
 const Chat:FC = () => {
     const state = useTypedSelector(state => state.userReducer)
+    console.log(state)
     return (
         <div className={сlasses.MainPage}>
             <div className={сlasses.LeftMenu_Block}>

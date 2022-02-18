@@ -6,7 +6,9 @@ const initialState: IUserData = {
     phoneNumber: '',
     firstName: '',
     secondName: '',
-    personalInfo: ''
+    personalInfo: '',
+    contacts: [],
+    rooms: []
 }
 
 export default function userReducer (state=initialState, action: ActiveMenu): IUserData {
@@ -18,7 +20,9 @@ export default function userReducer (state=initialState, action: ActiveMenu): IU
                 phoneNumber: action.payload.phoneNumber,
                 firstName: action.payload.firstName,
                 secondName: action.payload.secondName,
-                personalInfo: action.payload.personalInfo
+                personalInfo: action.payload.personalInfo,
+                contacts: action.payload.contacts,
+                rooms: action.payload.rooms
             }
         case UserDataActionsEnum.GET_USERDATA: 
             return state

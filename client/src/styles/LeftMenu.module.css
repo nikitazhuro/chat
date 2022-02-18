@@ -33,6 +33,7 @@
 .logo_img{
     width: 55px;
     height: 55px;
+    cursor: pointer;
 }
 .logo_block{
     margin-top: 30px;

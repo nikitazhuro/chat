@@ -28,13 +28,15 @@ const ModalActiveSettings = () => {
         formData.append('personalInfo', `${changeData.personalInfo}`)
         formData.append('img', imgFile)
         await updateUser(formData).then(() => {
-            alert('Данные обновлены')
+            alert('Данные обновлены');
+            window.location.reload();
         })
     }
     const exit = async () => {
         await logout();
         dispatch({type: IsAuthEnum.SET_ISAUTH, payload: false})
         router('/login')
+        window.location.reload()
     }
     return(
         <div className={classes.ModalSettings}>

@@ -25,3 +25,12 @@ export const updateUser = async (formData: any) => {
     const {data} = await $authHost.post('/api/user/updateUser', formData)
     return data
 }
+
+export const findAUser = async (phoneNumber: string) => {
+    const {data} = await $authHost.post('/api/user/findAUser', {phoneNumber})
+    return data;
+}
+
+export const addContact = async (myPhoneNumber: any, contactPhoneNumber: string) => {
+    await $authHost.post('/api/user/addContact', {myPhoneNumber, contactPhoneNumber})
+}

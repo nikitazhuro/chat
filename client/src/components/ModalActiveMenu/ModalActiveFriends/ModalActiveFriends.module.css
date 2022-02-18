@@ -48,3 +48,10 @@
     color: rgba(0, 0, 0, 0.507);
     margin-left: 5px;
 }
+.optionalMenu{
+    display: flex;
+}
+.optionalMenu button {
+    color: black;
+    border: 1px solid black;
+}
