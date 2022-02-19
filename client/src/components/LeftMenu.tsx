@@ -1,10 +1,9 @@
-import React, { FC, ReactChild, useState } from "react";
+import React, { FC } from "react";
 import classes from '../styles/LeftMenu.module.css'
 import friends_svg from '../img/friends.svg'
 import chats_svg from '../img/chats.svg'
 import settings_svg from '../img/settings.svg'
 import logo from '../img/4.png'
-import avatar from '../img/avatar.jpg'
 import { useDispatch } from "react-redux";
 import { ActiveModalEnum } from "../store/reducers/activeMenu/types";
 import { useTypedSelector } from "../hooks/useTypedSelector";
@@ -12,14 +11,16 @@ import { useNavigate } from "react-router-dom";
 
 
 const LeftMenu:FC = () => {
-    const {chats, settings, friends} = useTypedSelector(state => state.activeMenuReducer)
-    const {avatar} = useTypedSelector(state => state.userReducer)
-    const router = useNavigate()
-    const dispatch = useDispatch()
+    const {chats, settings, friends} = useTypedSelector(state => state.activeMenuReducer);
+    const {avatar} = useTypedSelector(state => state.userReducer);
+    const dispatch = useDispatch();
+    const router = useNavigate();
+    
     return (
         <div className={classes.LeftMenu}>
             <div className={classes.logo_block}>
                 <img onClick={() => router('/chat')} className={classes.logo_img} src={logo}/>
+                <div className={classes.elem}></div>
             </div>
             <div className={classes.options_block}>
                 <div className={classes.options_block_friends}>

@@ -2,8 +2,6 @@ import React, { FC, useEffect } from 'react';
 import AppRouter from './components/AppRouter';
 import './App.css'
 import { authCheck } from './http/user_api';
-import { useTypedSelector } from './hooks/useTypedSelector';
-import jwtDecode from 'jwt-decode'
 import { useDispatch } from 'react-redux';
 import { UserDataActionsEnum } from './store/reducers/userData/types';
 import { IsAuthEnum } from './store/reducers/auth/types';

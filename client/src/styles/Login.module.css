@@ -120,21 +120,21 @@ span{
     transform: translate(0%, 0%);
     color: #fff;
     background-size: 400%;
-  }
-  .elemBtn:hover {
+}
+.elemBtn:hover {
     color: #000;
     background-color: white;
     animation: animate 8s linear infinite;
-  }
-  @keyframes animate {
+}
+@keyframes animate {
     0% {
       background-position: 0%;
     }
     100% {
       background-position: 400%;
     }
-  }
-  .elemBtn:before {
+}
+.elemBtn:before {
     content: "";
     position: absolute;
     top: -1px;
@@ -147,10 +147,10 @@ span{
     border-radius: 20px;
     opacity: 0;
     transition: 0.5%;
-  }
-  .elemBtn:hover:before {
+}
+.elemBtn:hover:before {
     filter: blur(20px);
     opacity: 0.5;
     animation: animate 8s linear infinite;
-  }
+}
   

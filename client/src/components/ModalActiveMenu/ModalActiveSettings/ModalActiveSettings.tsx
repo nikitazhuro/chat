@@ -14,12 +14,14 @@ const ModalActiveSettings = () => {
     const {avatar, phoneNumber, firstName, secondName, personalInfo} = useTypedSelector(state => state.userReducer);
     const dispatch = useDispatch()
     const router = useNavigate()
+
     const [imgFile, setImgFile] = useState('');
     const [changeData, setChangeData] = useState({
         firstName: `${firstName}`,
         secondName: `${secondName}`,
         personalInfo: `${personalInfo}`
     })
+
     const changeAvatar = async () => {
         const formData = new FormData();
         formData.append('phoneNumber', `${phoneNumber}`)

@@ -10,6 +10,15 @@ class RoomController {
             return  res.status(400).json(error.message)
         }
     }
+    async getRoom  (req: any, res: any) {
+        try {
+            const {roomId} = req.body;
+            const room = await roomService.getRoom(roomId)
+            return res.json(room)
+        } catch (error: any) {
+            return  res.status(400).json(error.message)
+        }
+    }
 }
 
 export default new RoomController()

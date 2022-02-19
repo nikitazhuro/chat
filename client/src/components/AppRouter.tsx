@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { privateRouter, publicRouter } from "../router";

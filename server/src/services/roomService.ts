@@ -25,6 +25,17 @@ class RoomService {
             throw new Error(error.message)
         }
     }
+    async getRoom (roomId: string) {
+        try {
+            const room = await Room.findOne({_id: roomId})
+            if(!room){
+                throw new Error('Такой комнаты не существует')
+            }
+            return room
+        } catch (error: any) {
+            throw new Error(error.message)
+        }
+    }
 }
 
 export default new RoomService()

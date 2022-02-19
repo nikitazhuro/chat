@@ -8,6 +8,7 @@ import * as cors from 'cors';
 import * as mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 import User from './models/userModel';
+import Room from './models/roomModel';
 dotenv.config();
 
 const app = express();
@@ -24,10 +25,11 @@ const ws = new WebSocket.Server({
     port: 5000,
 }, () => console.log(`WS server started on port ${process.env.WS_PORT}`));
 ws.on('connection', (ws: any) => {
-    ws.on('message', (message: any) => {
+    ws.on('message',(message: any) => {
         message = JSON.parse(message);
         switch (message.event) {
             case 'message':
+                addMessToRoom(message)
                 broadcastMessage(message)
                 break;
             case 'connection':
@@ -35,10 +37,16 @@ ws.on('connection', (ws: any) => {
         }
     })
 })
+const addMessToRoom = async (message: any) => {
+    const room = await Room.findOne({_id: message.messageId})
+    room.messages.push(message)
+    room.save()
+}
+
 const broadcastMessage = async (message: any) => {
     const user = await User.findOne({phoneNumber :message.from})
     ws.clients.forEach((client: any) => {
-        if(user.rooms.includes(message.messageId)){
+        if(user.rooms.filter((room :any) => room._id = message.messageId).length){
             client.send(JSON.stringify(message))
         }
             

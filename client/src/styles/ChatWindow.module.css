@@ -1,7 +1,7 @@
 .ChatWindow{
     height: 100%;
     width: 100%;
-    background: radial-gradient(farthest-side ellipse at top left, rgba(238, 130, 238, 0.151), rgba(0, 255, 255, 0.212));
+    background-color: #22252e;
 }
 .ChatWindow_ContentBlock{
     height: 100%;
@@ -12,14 +12,42 @@
 }
 .ChatWindow_Nav{
     width: 100%;
-    height: 50px;
+    height: 100px;
 }
+.Nav_Block{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+}
+.Nav_BlockContent{
+    width: 50%;
+    display: flex;
+}
+.Nav_Avatar{
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+.Nav_Avatar img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.Nav_title{
+    margin-left: 20px;
+}
+.Nav_title h2{
+    color: white;
+    font-size: 22px;
+}
+
 .ChatWindow_ChatBlock{
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 .ChatWindow_Messages{
     display: flex;
@@ -27,7 +55,7 @@
     align-items: center;
     height: 100%;
     width: 100%;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 .ChatWindow_textareaBlock{
     display: flex;
@@ -37,9 +65,10 @@
     height: auto;
 }
 .ChatWindow_textareaWrapper{
-    margin: 20px 0;
+    padding-top: 15px;
+    border-radius: 20px;
     display: flex;
-    width: 50%;
+    width: 100%;
     align-items: center;
 }
 .ChatWindow_textarea_input{
@@ -48,58 +77,126 @@
 .ChatWindow_textarea_input input{
     width: 100%;
     height: 100%;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 255, 255, 0.5);
     border-radius: 15px;
-    background-color: white;
+    background-color: #414450;
     padding: 15px;
-}
-.ChatWindow_textarea_button button{
     color: white;
-    font-size: 16px;
-    text-transform: uppercase;
-    background: #22252e;
-    margin-left: 20px;
-    padding: 12.2px 13px;
-    border-radius: 50%;
-    border: none;
-    transition: all 0.4 ease;
-}
-.ChatWindow_textarea_button button:hover{
-    color: #22252e;
-    background-color: #b6c8c9;
-    cursor: pointer;
+    outline-color: rgba(0, 255, 255, 0.5);
 }
 .ChatWindow_MessagesWrapper{
     display: flex;
-    height: 100%;
+    flex-direction: column;
+    background-color: #41445079;
+    padding: 20px 40px 20px;
+    border-radius: 20px;
+    display: flex;
+    height: 95%;
     width: 50%;
+    overflow-y: hidden;
 }
 .ChatWindow_MessageList{
+    overflow-y: auto;
     width: 100%;
     height: 100%;
 }
 .ChatWindow_MessageList_Content{
+    width: 100%;
     margin-bottom: 10px;
-    display: flex;
 }
 .avatar {
-    width: 45px;
-    height: 45px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
 }
-.ChatWindow_MessageBlock{
+.ChatWindow_UserMessageBlock{
+    color: white;
+    width: fit-content;
     margin-left: 10px;
     border-radius: 15px;
-    padding: 5px 10px;
-    background-color: white;
+    border-bottom-left-radius: 0px;
+    padding: 15px;
+    background-color: #414450;
+}
+.ChatWindow_MyMessageBlock{
+    margin-left: auto;
+    margin-right: 10px;
+    color: white;
+    width: fit-content;
+    border-radius: 15px;
+    border-bottom-right-radius: 0px;
+    padding: 15px;
+    background: radial-gradient(farthest-side ellipse at top left, rgba(238, 130, 238, 0.2), rgba(0, 255, 255, 0.2))
 }
 .ChatWindow_MessageBlock_title h2{
-    font-size: 16px;
+    font-size: 10px;
+    margin-left: 10px;
 }
-.ChatWindow_MessageBlock_text p{
-    margin-top: 5px;
-}
-.ChatWindow_MessageList_avatarBlock{
+.ChatWindow_UserMessageList_avatarBlock{
+    color: white;
+    padding: 5px 10px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+}
+.ChatWindow_MyMessageList_avatarBlock{
+    color: white;
+    justify-content: flex-end;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+}
+.MyMessageBlock{
+    display: flex;
+    justify-content: flex-end;
+}
+.UserMessageBlock{
+    display: flex;
+}
+
+.ChatWindow_textarea_button button{
+    margin-left: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 14px;
+    padding: 5px;
+    border: 1px solid white;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all ease 0.4s;
+    transform: translate(0%, 0%);
+    color: #fff;
+    background-size: 400%;
+}
+.ChatWindow_textarea_button button:hover{
+    color: #000;
+    background-color: white;
+    animation: animate 8s linear infinite;
+}
+@keyframes animate {
+    0% {
+      background-position: 0%;
+    }
+    100% {
+      background-position: 400%;
+    }
+}
+.ChatWindow_textarea_button button:before{
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    z-index: -1;
+    background: linear-gradient(45deg, white, violet, #0ff, violet, #0ff, white, violet,#0ff);
+    background-size: 400%;
+    border-radius: 20px;
+    opacity: 0;
+    transition: 0.5%;
+}
+.ChatWindow_textarea_button button:hover:before{
+    filter: blur(10px);
+    opacity: 0.5;
+    animation: animate 8s linear infinite;
 }
