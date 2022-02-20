@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { ActiveModalEnum } from "../store/reducers/activeMenu/types";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useNavigate } from "react-router-dom";
+import { ShowModalActionsEnum } from "../store/reducers/showModal/types";
 
 
 const LeftMenu:FC = () => {
@@ -15,7 +16,19 @@ const LeftMenu:FC = () => {
     const {avatar} = useTypedSelector(state => state.userReducer);
     const dispatch = useDispatch();
     const router = useNavigate();
-    
+
+    const activateFriends = () => {
+        dispatch({type: ActiveModalEnum.SET_ACTIVE_FRIENDS, payload: true})
+        dispatch({type: ShowModalActionsEnum.SET_SHOWMODAL, payload: true})
+    }
+    const activateChats = () => {
+        dispatch({type: ActiveModalEnum.SET_ACTIVE_CHATS, payload: true})
+        dispatch({type: ShowModalActionsEnum.SET_SHOWMODAL, payload: true})
+    }
+    const activateSettings = () => {
+        dispatch({type: ActiveModalEnum.SET_ACTIVE_SETTINGS, payload: true})
+        dispatch({type: ShowModalActionsEnum.SET_SHOWMODAL, payload: true})
+    }
     return (
         <div className={classes.LeftMenu}>
             <div className={classes.logo_block}>
@@ -25,14 +38,14 @@ const LeftMenu:FC = () => {
             <div className={classes.options_block}>
                 <div className={classes.options_block_friends}>
                     <img 
-                    onClick={() => dispatch({type: ActiveModalEnum.SET_ACTIVE_FRIENDS, payload: true})} 
+                    onClick={activateFriends} 
                     className={friends ? classes.svg_icon_active : classes.svg_icon} 
                     src={friends_svg}
                     />
                 </div>
                 <div className={classes.options_block_chats}>
                     <img
-                    onClick={() => dispatch({type: ActiveModalEnum.SET_ACTIVE_CHATS, payload: true})} 
+                    onClick={activateChats} 
                     className={chats ? classes.svg_icon_active : classes.svg_icon} 
                     src={chats_svg}/>
                 </div>
@@ -43,7 +56,7 @@ const LeftMenu:FC = () => {
                 </div>
                 <div className={classes.profile_block_svg}>
                     <img 
-                    onClick={() => dispatch({type: ActiveModalEnum.SET_ACTIVE_SETTINGS, payload: true})} 
+                    onClick={activateSettings} 
                     className={settings ? classes.svg_icon_active : classes.svg_icon} 
                     src={settings_svg}/>
                 </div>

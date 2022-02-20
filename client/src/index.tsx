@@ -5,7 +5,7 @@ import {myStore} from './store'
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  <Provider store={myStore}>
+<Provider store={myStore}>
     <BrowserRouter>
       <App/>
     </BrowserRouter>

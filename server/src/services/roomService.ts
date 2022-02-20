@@ -11,11 +11,19 @@ class RoomService {
             const user = await User.findOne({phoneNumber: myPhoneNumber})
             const contact = await User.findOne({phoneNumber: contactPhoneNumber})
 
+            const myObject = {
+                phoneNumber: myPhoneNumber,
+                avatar: user.avatar[0],
+                userName: `${user.firstName} ` + user.secondName
+            }
+            const userObject = {
+                phoneNumber: contactPhoneNumber,
+                avatar: contact.avatar[0],
+                userName: `${contact.firstName} ` + contact.secondName
+            }
             const newRoom = await Room.create({
-                users: [myPhoneNumber, contactPhoneNumber], 
-                avatar: contact.avatar[0], 
-                roomName: `${contact.firstName} ` + contact.secondName});
-
+                users: [myObject, userObject], 
+            });
             user.rooms.push(newRoom)
             contact.rooms.push(newRoom)
             user.save()

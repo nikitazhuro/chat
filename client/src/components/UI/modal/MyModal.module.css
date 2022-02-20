@@ -2,9 +2,9 @@
     position: fixed;
     height: 100%;
     display: flex;
-    width: 400px;
-    transform: translateX(-400px) ;
-    transition: transform 0.6s ease; 
+    width: 380px;
+    transform: translateX(-380px) ;
+    transition: transform .6s ease; 
 }
 .MyModal.Active {
     transform: translateX(0%);
@@ -13,7 +13,7 @@
 .MyModal_Content {
     border-right: 1px rgba(0, 255, 255, 0.05) solid;
     background-color: #22252e;
-    width: 400px;
+    width: 380px;
     height: 100%;
     position: absolute;
 }

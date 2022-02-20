@@ -94,6 +94,22 @@
     align-items: center;
     margin-right: 15px;
 }
+.Chats_ChatsBlock button{
+    margin-left: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    border: 1px solid #0ff;
+    padding: 5px;
+    color: violet;
+    transition: all ease 0.4s;
+}
+.Chats_ChatsBlock button:hover{
+    border: 1px solid violet;
+    color: #0ff;
+}
 .Chats_ChatsBlock{
     margin-top: 100px;
 }
@@ -105,7 +121,6 @@
     display: flex;
     padding: 15px 25px;
     border-radius: 20px;
-    cursor: pointer;
 }
 .Chats_ChatBlock:hover{
     background: radial-gradient(farthest-side ellipse at top left, rgba(238, 130, 238, 0.2), rgba(0, 255, 255, 0.2))

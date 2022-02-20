@@ -1,8 +1,12 @@
 .ModalSettings{
     height: 100%;
     width: 100%;
+    padding: 30px;
+    color: white;
 }
-
+.ModalSettings_Title h1{
+    font-size: 36px;
+}
 .ModalSettings_Content{
     height: 100%;
     width: 100%;
@@ -37,12 +41,12 @@
     display: flex;
     justify-content: center; 
 }
-.Inputs{
-    width: 250px;
-}
 
 .Inputs input {
-    border: 1px black solid;
+    color: white;
+    background-color: #414450;
+    border: 1px rgba(0, 255, 255, 0.5) solid;
+    outline-color: rgba(0, 255, 255, 0.5);
     margin-top: 15px;
     padding: 15px 10px;
 }
@@ -54,12 +58,51 @@
 .Buttons {
     display: flex;
     justify-content: space-between;
-    width: 250px;
+    width: 100%;
 }
 
-.Buttons button {
-    color: black;
-    border: 1px solid black;
-    width: 90px;
+.Buttons button{
+    width: 150px;
+    font-size: 14px;
     padding: 10px;
+    border: 1px solid white;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all ease 0.4s;
+    transform: translate(0%, 0%);
+    color: #fff;
+    background-size: 400%;
+}
+.Buttons button:hover{
+    color: #000;
+    background-color: white;
+    animation: animate 8s linear infinite;
+}
+@keyframes animate {
+    0% {
+      background-position: 0%;
+    }
+    100% {
+      background-position: 400%;
+    }
+}
+ button:before{
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: -1;
+    background: linear-gradient(45deg, white, violet, #0ff, violet, #0ff, white, violet,#0ff);
+    background-size: 400%;
+    border-radius: 20px;
+    opacity: 0;
+    transition: 0.5%;
+}
+.Buttons button:hover:before{
+    filter: blur(15px);
+    opacity: 0.5;
+    animation: animate 8s linear infinite;
 }

@@ -43,8 +43,10 @@ const ModalActiveSettings = () => {
     return(
         <div className={classes.ModalSettings}>
             <div className={classes.ModalSettings_Content}>
+                <div className={classes.ModalSettings_Title}>
+                    <h1>Settings</h1>
+                </div>
                 <div className={classes.AvatarSettings}>
-                    <h1>Настройки профиля</h1>
                     <label><input
                     onChange={(e: any) => setImgFile(e.target.files[0])}
                     type='file' />

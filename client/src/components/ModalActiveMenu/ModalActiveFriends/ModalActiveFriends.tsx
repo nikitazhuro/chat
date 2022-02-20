@@ -102,7 +102,7 @@ const ModalActiveFriends = () => {
                                 <span className={classes.Chats_ChatInfo_name}>{contact.phoneNumber}</span>
                             </div>
                         </div>
-                        <button onClick={() => createChat(contact.phoneNumber)}>Click</button>
+                        <button onClick={() => createChat(contact.phoneNumber)}>Hi</button>
                     </div>
                     ) 
                 : <h1>Контакты отсутствуют</h1>
