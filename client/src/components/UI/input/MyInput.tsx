@@ -1,8 +1,8 @@
 import React, { ChangeEvent, CSSProperties, HTMLInputTypeAttribute, ReactChild } from "react";
 import classes from './MyInput.module.css'
 
-type InputBaseProps = {
-    type?: HTMLInputTypeAttribute,
+interface IInputBaseProps  {
+    type: HTMLInputTypeAttribute,
     children?: ReactChild,
     className?: string;
     id?: string;
@@ -14,7 +14,7 @@ type InputBaseProps = {
     value?: string;
 }
 
-const MyInput = ({...props}: InputBaseProps) => {
+const MyInput = ({...props}: IInputBaseProps) => {
     return(
         <input className={classes.MyInput} {...props}/>
     )

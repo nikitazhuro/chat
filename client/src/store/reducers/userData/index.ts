@@ -1,21 +1,19 @@
 import { IUserData, ActiveMenu, UserDataActionsEnum } from "./types";
 
 const initialState: IUserData = {
-    userName: '',
     avatar: '',
     phoneNumber: '',
     firstName: '',
     secondName: '',
     personalInfo: '',
     contacts: [],
-    rooms: []
+    rooms:  []
 }
 
-export default function userReducer (state=initialState, action: ActiveMenu): IUserData {
+export default function userReducer (state: IUserData = initialState, action: ActiveMenu): IUserData {
     switch (action.type){
         case UserDataActionsEnum.SET_USERDATA:
             return {...state,
-                userName: action.payload.userName, 
                 avatar: action.payload.avatar[0], 
                 phoneNumber: action.payload.phoneNumber,
                 firstName: action.payload.firstName,
@@ -24,8 +22,6 @@ export default function userReducer (state=initialState, action: ActiveMenu): IU
                 contacts: action.payload.contacts,
                 rooms: action.payload.rooms
             }
-        case UserDataActionsEnum.GET_USERDATA: 
-            return state
         default :
             return state
     }

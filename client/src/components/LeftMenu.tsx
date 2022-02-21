@@ -18,16 +18,16 @@ const LeftMenu:FC = () => {
     const router = useNavigate();
 
     const activateFriends = () => {
-        dispatch({type: ActiveModalEnum.SET_ACTIVE_FRIENDS, payload: true})
-        dispatch({type: ShowModalActionsEnum.SET_SHOWMODAL, payload: true})
+        dispatch({type: ActiveModalEnum.SET_ACTIVE_FRIENDS, payload: true});
+        dispatch({type: ShowModalActionsEnum.SET_SHOWMODAL, payload: true});
     }
     const activateChats = () => {
-        dispatch({type: ActiveModalEnum.SET_ACTIVE_CHATS, payload: true})
-        dispatch({type: ShowModalActionsEnum.SET_SHOWMODAL, payload: true})
+        dispatch({type: ActiveModalEnum.SET_ACTIVE_CHATS, payload: true});
+        dispatch({type: ShowModalActionsEnum.SET_SHOWMODAL, payload: true});
     }
     const activateSettings = () => {
-        dispatch({type: ActiveModalEnum.SET_ACTIVE_SETTINGS, payload: true})
-        dispatch({type: ShowModalActionsEnum.SET_SHOWMODAL, payload: true})
+        dispatch({type: ActiveModalEnum.SET_ACTIVE_SETTINGS, payload: true});
+        dispatch({type: ShowModalActionsEnum.SET_SHOWMODAL, payload: true});
     }
     return (
         <div className={classes.LeftMenu}>

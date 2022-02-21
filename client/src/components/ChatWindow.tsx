@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import classes from '../styles/ChatWindow.module.css'
 import MyButton from "./UI/button/MyButton";
 import { useParams } from "react-router-dom";
@@ -6,56 +6,73 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 import { getRoom } from "../http/roomApi";
 import { IMessage } from "../types";
 
+interface IRoom {
+    avatar: string, 
+    roomName:string
+}
 
+
+interface IServerData {
+    users: string []
+    messages: IMessage[]
+}
 
 const ChatWindow:FC = () => {
-    const {roomId} = useParams();
+    const {roomId} = useParams<string>();
     const {phoneNumber, firstName, secondName, avatar} = useTypedSelector(state => state.userReducer);
-
-    const textArea: any = useRef();
-    const scrollList: any = useRef();
-    const [text, setText] = useState('');
-    const [room, setRoom] = useState({
+    console.log(roomId)
+    const textArea = useRef<HTMLTextAreaElement>(null);
+    const scrollList = useRef<HTMLInputElement>(null);
+    const [text, setText] = useState<string>('');
+    const [room, setRoom] = useState<IRoom>({
         avatar: '',
         roomName: ''
     })
-    const [serverData, setServerData] = useState<any>({})
-    const [messageList, setMessageList] = useState<any[]>([])
+    const [serverData, setServerData] = useState<IServerData>()
+    const [messageList, setMessageList] = useState<IMessage[]>([])
     const socket = useRef<WebSocket>();
-    console.log(serverData)
+
     const autosize = () => {
         setTimeout(function(){
-            textArea.current.style.cssText = 'height:auto';
-            textArea.current.style.cssText = 'height:' + textArea.current.scrollHeight + 'px';
+            if(textArea && textArea.current){
+               textArea.current.style.cssText = 'height:auto';
+               textArea.current.style.cssText = 'height:' + textArea.current.scrollHeight + 'px'; 
+            }
         },0);
       }
     const scrollToBottom = () => {
-		scrollList.current.scrollTop = scrollList.current.scrollHeight;
+		if(scrollList && scrollList.current){
+            scrollList.current.scrollTop = scrollList.current.scrollHeight;
+        }
 	};
     const sendAMessage = () => {
-        const message: IMessage = {
-            id: Date.now(),
-            event: 'message',
-            messageId : roomId,
-            userName: `${firstName} ` + secondName,
-            from: phoneNumber,
-            avatar,
-            value: text,
+        if(roomId){
+            const message: IMessage = {
+                id: Date.now(),
+                event: 'message',
+                messageId : roomId,
+                userName: `${firstName} ` + secondName,
+                from: phoneNumber,
+                avatar,
+                value: text,
+            }
+            socket.current?.send(JSON.stringify(message))
+            setText('')
         }
-        socket.current?.send(JSON.stringify(message))
-        setText('')
     }
     useEffect(() => {
         socket.current?.close()
-        const messages = async() => {
-            const data = await getRoom(roomId)
-            setRoom({...room, 
+        if(roomId){
+            const messages = async() => {
+                const data = await getRoom(roomId);
+                setRoom({...room, 
                 avatar: data.users.filter((e: any) => e.phoneNumber !== phoneNumber)[0].avatar, 
                 roomName: data.users.filter((e: any) => e.phoneNumber !== phoneNumber)[0].userName})
-            setMessageList([...data.messages])
-            setServerData({...data})
+                setMessageList([...data.messages])
+                setServerData({...data})
+            }
+            messages()
         }
-        messages()
         socket.current = new WebSocket(`ws://localhost:5000`);
         socket.current.onopen = () => {
             console.log('Соединение установлено')
@@ -76,7 +93,7 @@ const ChatWindow:FC = () => {
     }, [roomId])
     return (
         <div className={classes.ChatWindow}>
-            <div className={serverData.users ? classes.ChatWindow_ContentBlock : classes.ChatWindow_Dnone}>
+            <div className={serverData?.users && roomId ? classes.ChatWindow_ContentBlock : classes.ChatWindow_Dnone}>
                 <div className={classes.ChatWindow_Nav}>
                     <div className={classes.Nav_Block}>
                         <div className={classes.Nav_BlockContent}>

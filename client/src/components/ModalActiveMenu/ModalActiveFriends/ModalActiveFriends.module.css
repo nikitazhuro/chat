@@ -94,7 +94,7 @@
     align-items: center;
     margin-right: 15px;
 }
-.Chats_ChatsBlock button{
+.HiBtn{
     margin-left: auto;
     width: 40px;
     height: 40px;
@@ -106,7 +106,7 @@
     color: violet;
     transition: all ease 0.4s;
 }
-.Chats_ChatsBlock button:hover{
+.HiBtn:hover{
     border: 1px solid violet;
     color: #0ff;
 }

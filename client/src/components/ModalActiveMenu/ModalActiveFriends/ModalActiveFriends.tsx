@@ -57,6 +57,7 @@ const ModalActiveFriends = () => {
             <div className={classes.Chats_SearchBlock}>
                 <div className={activeInput ? classes.Chats_Search_Active : classes.Chats_Search}>
                     <MyInput
+                    type='text'
                     value={chatSearch}
                     placeholder='Global search...'
                     onChange={(e) => setChatSearch(e.target.value)}
@@ -76,7 +77,7 @@ const ModalActiveFriends = () => {
                                 <img className={classes.avatar} src={`http://localhost:4000/` + searchResult.avatar}/>
                             </div>
                             <div className={classes.Chats_ChatInfo}>
-                                <h2>{searchResult.firstName}{searchResult.secondName}</h2>
+                                <h2>{searchResult.firstName} {searchResult.secondName}</h2>
                                 <div>
                                     <span className={classes.Chats_ChatInfo_name}>{searchResult.phoneNumber}</span>
                                 </div>
@@ -92,17 +93,17 @@ const ModalActiveFriends = () => {
                     </div>
                 : contacts?.length 
                 ? contacts.map(contact => 
-                    <div key={contact.userNumber} className={classes.Chats_ChatBlock}>
+                    <div key={contact.phoneNumber} className={classes.Chats_ChatBlock}>
                         <div className={classes.Chats_ChatImg}>
                             <img className={classes.avatar} src={`http://localhost:4000/` + contact.avatar}/>
                         </div>
                         <div className={classes.Chats_ChatInfo}>
-                            <h2>{contact.firstName}{contact.secondName}</h2>
+                            <h2>{contact.firstName} {contact.secondName}</h2>
                             <div>
                                 <span className={classes.Chats_ChatInfo_name}>{contact.phoneNumber}</span>
                             </div>
                         </div>
-                        <button onClick={() => createChat(contact.phoneNumber)}>Hi</button>
+                        <button className={classes.HiBtn} onClick={() => createChat(contact.phoneNumber)}>Hi</button>
                     </div>
                     ) 
                 : <h1>Контакты отсутствуют</h1>

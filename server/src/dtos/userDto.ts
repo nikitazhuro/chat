@@ -6,8 +6,8 @@ interface IData {
 
 
 export default class UserDto {
-    id: string;
-    phoneNumber: string;
+    id;
+    phoneNumber;
 
     constructor(data: IData) {
         this.id = data._id;

@@ -21,7 +21,7 @@ export const logout = async () => {
     localStorage.removeItem('accessToken');
 }
 
-export const updateUser = async (formData: any) => {
+export const updateUser = async (formData: object) => {
     const {data} = await $authHost.post('/api/user/updateUser', formData)
     return data
 }
@@ -31,6 +31,6 @@ export const findAUser = async (phoneNumber: string) => {
     return data;
 }
 
-export const addContact = async (myPhoneNumber: any, contactPhoneNumber: string) => {
+export const addContact = async (myPhoneNumber: string, contactPhoneNumber: string) => {
     await $authHost.post('/api/user/addContact', {myPhoneNumber, contactPhoneNumber})
 }

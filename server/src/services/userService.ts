@@ -16,8 +16,10 @@ class UserService {
 
             const hashPassword = await bcrypt.hash(password, 5);
             await User.create({phoneNumber, password: hashPassword})
-        } catch (error: any) {
-            throw new Error(`Ошибка регистрации: ${error.message}`)
+        } catch (error) {
+            if(error instanceof Error){
+                throw new Error(error.message)
+            }
         }
     }
     async login (phoneNumber:string, password: string) {
@@ -35,8 +37,10 @@ class UserService {
             await tokenService.saveTokens(userDto.id, tokens.refreshToken);
 
             return {...tokens, userDto}
-        } catch (error: any) {
-            throw new Error(`Ошибка регистрации: ${error.message}`)
+        }catch (error) {
+            if(error instanceof Error){
+                throw new Error(error.message)
+            }
         }
     }
     async authCheck (accessToken: string) {
@@ -44,15 +48,19 @@ class UserService {
             const tokenData:any = tokenService.validAccessToken(accessToken)
             const user = await User.findOne({phoneNumber: tokenData.userDto.phoneNumber})
             return user
-        } catch (error: any) {
-            throw new Error(`Ошибка получения данных: ${error.message}`)
+        } catch (error) {
+            if(error instanceof Error){
+                throw new Error(error.message)
+            }
         }
     }
     async logout (refreshToken: any) {
         try {
             await Token.deleteOne({refreshToken});
-        } catch (error: any) {
-            throw new Error(`Ошибка: ${error.message}`)
+        } catch (error) {
+            if(error instanceof Error){
+                throw new Error(error.message)
+            }
         }
     }
 
@@ -76,16 +84,20 @@ class UserService {
                 user.personalInfo = personalInfo;
             }
             return user.save()
-        } catch (e: any) {
-            throw new Error(e.message)
+        } catch (error) {
+            if(error instanceof Error){
+                throw new Error(error.message)
+            }
         } 
     }
     async findAUser (phoneNumber: string) {
         try {
             const user = await User.findOne({phoneNumber});
             return user
-        } catch (e: any) {
-            throw new Error(e.message)
+        } catch (error) {
+            if(error instanceof Error){
+                throw new Error(error.message)
+            }
         }
     }
     async addContact (myPhoneNumber: string, contactPhoneNumber: string) {
@@ -96,12 +108,14 @@ class UserService {
                 phoneNumber: contact.phoneNumber,
                 avatar: contact.avatar,
                 firstName: contact.firstName,
-                secondtName: contact.secondName
+                secondName: contact.secondName
             }
             user.contacts.push(newContactData)
             return user.save()
-        } catch (e: any) {
-            throw new Error(e.message)
+        } catch (error) {
+            if(error instanceof Error){
+                throw new Error(error.message)
+            }
         }
     }
 }

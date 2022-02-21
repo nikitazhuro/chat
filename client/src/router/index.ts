@@ -2,11 +2,11 @@ import React from "react";
 import Chat from "../pages/MainPage";
 import Login from "../pages/Login";
 
-export interface IRouter {
+interface IRouter {
     path: string,
     element: React.ComponentType,
 }
-export enum RouterList {
+enum RouterList {
     LOGIN = '/login',
     CHAT = '/chat',
     CHAT_ID = '/chat/:roomId'
@@ -14,7 +14,7 @@ export enum RouterList {
 
 export const publicRouter: IRouter[] = [
     {path: RouterList.LOGIN, element: Login},
-    {path: '*', element: Login}
+    {path: '*',element: Login}
 ]
 
 export const privateRouter: IRouter[] = [

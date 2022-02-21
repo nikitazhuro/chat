@@ -8,30 +8,36 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { IsAuthEnum } from "../store/reducers/auth/types";
 
-interface IState {
+interface ILogin {
     phoneNumber: string,
     password: string
 }
+
 const Login:FC = () => {
-    const [state, setState] = useState<IState>({
+    const [state, setState] = useState<ILogin>({
         phoneNumber: '',
         password: ''
-    })
+    });
+
     const router = useNavigate();
-    const dispatch = useDispatch()
-    const [activeButton, setActiveButton] = useState('')
+    const dispatch = useDispatch();
+
+    const [activeButton, setActiveButton] = useState<string>('');
+
     const reg = async () => {
         await registration(state.phoneNumber, state.password).then(() => {
             setActiveButton('login')
         })
     }
+
     const log = async () => {
-        await login(state.phoneNumber, state.password).then((data) => {
+        await login(state.phoneNumber, state.password).then(() => {
             dispatch({type: IsAuthEnum.SET_ISAUTH, payload: true})
             router('/chat')
             window.location.reload()
         })
     }
+
     return (
         <div className={classes.Login}>
             <div >
@@ -53,7 +59,8 @@ const Login:FC = () => {
                         <MyButton className={classes.elemBtn} onClick={() => setActiveButton('registration')}>Регистрация</MyButton>
                     </div>
                     }
-                    {activeButton == 'login' && <div className={classes.reg_form_elems}>
+                    {activeButton == 'login' && 
+                    <div className={classes.reg_form_elems}>
                         <MyInput
                         placeholder="Введите номер телефона"
                         value={state.phoneNumber}
@@ -68,8 +75,10 @@ const Login:FC = () => {
                         <div className={classes.reg_form_elemSpan}>
                             <span onClick={() => setActiveButton('registration')}>Нет аккаунтa? Зарегистрируйтесь</span>
                         </div>   
-                    </div> }
-                    {activeButton == 'registration' && <div className={classes.reg_form_elems}>
+                    </div> 
+                    }
+                    {activeButton == 'registration' && 
+                    <div className={classes.reg_form_elems}>
                         <MyInput
                         placeholder="Введите номер телефона"
                         value={state.phoneNumber}
@@ -84,7 +93,8 @@ const Login:FC = () => {
                         <div className={classes.reg_form_elemSpan}>
                             <span onClick={() => setActiveButton('login')}>Есть аккаунт? Войдите</span>    
                         </div>  
-                    </div> }  
+                    </div> 
+                    }  
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, CSSProperties, HTMLInputTypeAttribute, ReactChild } from "react";
 import classes from './MyButton.module.css'
 
-type InputBaseProps = {
+interface IInputBaseProps  {
     children?: ReactChild,
     className?: string;
     id?: string;
@@ -9,7 +9,7 @@ type InputBaseProps = {
     style?: CSSProperties;
 }
 
-const MyButton = ({...props}: InputBaseProps) => {
+const MyButton = ({...props}: IInputBaseProps) => {
     return(
         <button className={classes.MyButton} {...props}>{props.children}</button>
     )

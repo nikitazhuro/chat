@@ -1,47 +1,60 @@
 import userService from "../services/userService";
+import * as express from 'express'
 import * as uuid from 'uuid'
 import * as path from 'path'
 
+interface Iqw {
+    authorization?: string
+}
+
 class UserController {
-    async registration  (req: Request, res: any) {
+    async registration  (req: express.Request, res: express.Response) {
         try {
             const {phoneNumber, password}: any = req.body;
             await userService.registration(phoneNumber, password)
             return res.json('Вы успешно зарегистрированы')
-        } catch (error: any) {
-            return  res.status(400).json(error.message)
+        } catch (error) {
+            if(error instanceof Error){
+                return  res.status(400).json(error.message)
+            }
         }
     }
-    async login  (req: Request, res: any) {
+    async login  (req: express.Request, res: express.Response) {
         try {
             const {phoneNumber, password}: any = req.body;
             const data = await userService.login(phoneNumber, password);
-            res.cookie('refreshToken', data.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true});
+            res.cookie('refreshToken', data?.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true});
             return res.json(data);
-        } catch (error: any) {
-            return  res.status(400).json(error.message)
+        } catch (error) {
+            if(error instanceof Error){
+                return  res.status(400).json(error.message)
+            }
         }
     }
-    async authCheck (req:any, res: any) {
+    async authCheck (req: express.Request, res: express.Response) {
         try {
-            const accessToken = req.headers.autorization.split(' ')[1];
-            const user = await userService.authCheck(accessToken)
+            const accessToken: string = <string>req.headers.autorization;
+            const user = await userService.authCheck(accessToken.split(' ')[1])
             return res.json(user)
         } catch (error) {
-            return res.status(400).json('Ошибка доступа')
+            if(error instanceof Error){
+                return  res.status(400).json(error.message)
+            }
         }
     }
-    async logout (req:any, res: any) {
+    async logout (req: express.Request, res: express.Response) {
         try {
             const {refreshToken} = req.cookies;
             await userService.logout(refreshToken);
             res.clearCookie('refreshToken')
             return res.json('Вы вышли из аккаунта')
-        } catch (e) {
-            return res.status(400).json(e)
+        } catch (error) {
+            if(error instanceof Error){
+                return  res.status(400).json(error.message)
+            }
         }
     }
-    async updateUser(req:any, res: any) {
+    async updateUser(req: express.Request, res: express.Response) {
         try {
             const {phoneNumber, firstName, secondName, personalInfo} = req.body;
             let image : any;
@@ -57,26 +70,32 @@ class UserController {
             
             await userService.updateUser(phoneNumber, fileName, firstName, secondName, personalInfo)
             return res.json('complete')
-        } catch (e: any) {
-            return res.status(400).json(e.message)
+        } catch (error) {
+            if(error instanceof Error){
+                return  res.status(400).json(error.message)
+            }
         }
     }
-    async findAUser (req:any, res: any) {
+    async findAUser (req: express.Request, res: express.Response) {
         try {
             const {phoneNumber} = req.body;
             const user = await userService.findAUser(phoneNumber);
             return res.json(user)
-        } catch (e) {
-            return res.status(400).json(e)
+        } catch (error) {
+            if(error instanceof Error){
+                return  res.status(400).json(error.message)
+            }
         }
     }
-    async addContact (req:any, res: any) {
+    async addContact (req: express.Request, res: express.Response) {
         try {
             const {myPhoneNumber, contactPhoneNumber} = req.body;
             await userService.addContact(myPhoneNumber, contactPhoneNumber);
             return res.json('Пользователь добавлен')
-        } catch (e) {
-            return res.status(400).json(e)
+        } catch (error) {
+            if(error instanceof Error){
+                return  res.status(400).json(error.message)
+            }
         }
     }
 }

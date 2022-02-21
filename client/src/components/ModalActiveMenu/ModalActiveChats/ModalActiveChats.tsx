@@ -22,6 +22,7 @@ const ModalActiveChats = () => {
             <div className={classes.Chats_SearchBlock}>
                 <div className={activeSearch ? classes.Chats_Search_Active : classes.Chats_Search}>
                 <MyInput
+                type='text'
                 value={chatSearch}
                 placeholder='Search...'
                 onChange={(e) => setChatSearch(e.target.value)}
@@ -32,14 +33,14 @@ const ModalActiveChats = () => {
                 {chatSearch
                 ? rooms 
                     ? rooms.filter(room => 
-                        room.roomName.toLowerCase().includes(chatSearch.toLowerCase())
+                        room.users.filter((e: any) => e.phoneNumber !== phoneNumber)[0].userName.toLowerCase().includes(chatSearch.toLowerCase())
                     ).map((room, index) => 
                     <div key={index} onClick={() => router(`/chat/${room._id}`)} className={classes.Chats_ChatBlock}>
                         <div className={classes.Chats_ChatImg}>
-                            <img className={classes.avatar} src={`http://localhost:4000/` + room.avatar}/>
+                            <img className={classes.avatar} src={`http://localhost:4000/` + room.users.filter((e: any) => e.phoneNumber !== phoneNumber)[0].avatar}/>
                         </div>
                         <div className={classes.Chats_ChatInfo}>
-                            <h2>{room.roomName}</h2>
+                            <h2>{room.users.filter((e: any) => e.phoneNumber !== phoneNumber)[0].userName}</h2>
                         </div>
                     </div>) 
                     : <div><h1>Комнат нет</h1></div>

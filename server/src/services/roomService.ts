@@ -29,8 +29,10 @@ class RoomService {
             user.save()
             contact.save()
             return newRoom
-        } catch (error: any) {
-            throw new Error(error.message)
+        } catch (error) {
+            if(error instanceof Error){
+                throw new Error(error.message)
+            }
         }
     }
     async getRoom (roomId: string) {
@@ -40,8 +42,10 @@ class RoomService {
                 throw new Error('Такой комнаты не существует')
             }
             return room
-        } catch (error: any) {
-            throw new Error(error.message)
+        } catch (error) {
+            if(error instanceof Error){
+                throw new Error(error.message)
+            }
         }
     }
 }

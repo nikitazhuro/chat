@@ -1,23 +1,38 @@
+interface IUserContacts {
+    phoneNumber: string,
+    avatar: string [],
+    firstName: string,
+    secondName: string
+}
+
+interface IUserRoomUser{
+    phoneNumber: string,
+    avatar: string,
+    userName: string
+}
+
+interface IUserRoom {
+    _id : string,
+    messages: [],
+    users: IUserRoomUser []
+}
+
 export interface IUserData {
-    userName?: string,
-    avatar?: string,
-    phoneNumber?: string,
-    firstName?: string,
-    secondName?: string,
-    personalInfo?: string,
-    contacts?: any [],
-    rooms?: any []
+    avatar: string,
+    phoneNumber: string,
+    firstName: string,
+    secondName: string,
+    personalInfo: string,
+    contacts: IUserContacts [],
+    rooms: IUserRoom []
 }
 
 export enum UserDataActionsEnum {
     SET_USERDATA ='SET_USERDATA',
-    GET_USERDATA = 'GET_USERDATA'
 }
-
 
 interface IPayload {
     id: string,
-    userName: string,
     avatar: string,
     phoneNumber: string,
     firstName: string,
@@ -26,14 +41,9 @@ interface IPayload {
     contacts: [],
     rooms: any []
 }
-
-interface GetUserDataAction {
-    type: UserDataActionsEnum.GET_USERDATA
-    payload: IPayload;
-}
 interface SetUserDataAction {
     type: UserDataActionsEnum.SET_USERDATA
     payload: IPayload;
 }
 
-export type ActiveMenu = GetUserDataAction | SetUserDataAction
+export type ActiveMenu = SetUserDataAction
